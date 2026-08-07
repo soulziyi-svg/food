@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ODD TABLE 이상한식탁 | 향토음식 &amp; 호러음식 전문 사이트</title>
+<meta name="description" content="숨겨진 지역의 향토음식과 등골이 서늘한 호러 음식을 만나는 특이한 식품 전문 사이트">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Nosifer&family=Creepster&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="header" id="header">
+  <button class="hamburger" id="hamburgerBtn" aria-label="메뉴 열기">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav class="main-nav">
+    <div class="main-nav__item">
+      <a href="#content1" class="main-nav__link" data-scroll="#content1">향토음식</a>
+      <div class="main-nav__submenu main-nav__submenu--local">
+        <ul class="main-nav__submenu-list" id="navLocalList"></ul>
+      </div>
+    </div>
+    <div class="main-nav__item">
+      <a href="#content2" class="main-nav__link" data-scroll="#content2">엽기음식</a>
+      <div class="main-nav__submenu main-nav__submenu--horror">
+        <ul class="main-nav__submenu-list" id="navHorrorList"></ul>
+      </div>
+    </div>
+  </nav>
+
+  <a href="#main" class="logo" data-scroll="#main" aria-label="ODD TABLE 홈으로">
+    <svg width="34" height="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="24" cy="24" r="22" stroke="#21302B" stroke-width="3"/>
+      <path d="M16 12v11a4 4 0 0 0 4 4v13" stroke="#21302B" stroke-width="3" stroke-linecap="round"/>
+      <path d="M16 12v8M20 12v8" stroke="#21302B" stroke-width="3" stroke-linecap="round"/>
+      <path d="M32 12c-3 2-4 5-4 9 0 3 1.5 4.5 4 5.5V40" stroke="#FFC200" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="logo__text">
+      <strong>ODD TABLE</strong>
+      <em>이상한식탁</em>
+    </span>
+  </a>
+
+  <div class="search">
+    <input type="text" class="search__input" placeholder="어떤 특별한 음식을 찾으세요?">
+    <button class="search__btn" aria-label="검색">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ===================== SIDE MENU (햄버거) ===================== -->
+<div class="side-overlay" id="sideOverlay"></div>
+<aside class="side-menu" id="sideMenu">
+  <button class="side-menu__close" id="sideMenuClose" aria-label="메뉴 닫기">×</button>
+  <div class="side-menu__logo">ODD TABLE <em>이상한식탁</em></div>
+
+  <div class="accordion">
+    <button class="accordion__trigger" data-acc="1">향토음식<span>＋</span></button>
+    <div class="accordion__panel" data-acc-panel="1">
+      <ul id="sideRegionList" class="accordion__list"></ul>
+    </div>
+
+    <button class="accordion__trigger" data-acc="2">엽기음식<span>＋</span></button>
+    <div class="accordion__panel" data-acc-panel="2">
+      <ul id="sideHorrorList" class="accordion__list"></ul>
+    </div>
+
+    <button class="accordion__trigger" data-acc="3">마이페이지<span>＋</span></button>
+    <div class="accordion__panel" data-acc-panel="3">
+      <ul class="accordion__list">
+        <li><a href="#">고객후기</a></li>
+        <li><a href="#">카탈로그</a></li>
+        <li><a href="#">쿠폰함</a></li>
+        <li><a href="#">회원정보 수정</a></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<!-- ===================== MAIN 슬라이더 ===================== -->
+<section id="main" class="hero">
+  <div class="hero__track" id="heroTrack">
+
+    <article class="hero__slide hero__slide--local" data-target="#content1">
+      <div class="hero__bg" style="background-image:url('image/01.png')" role="img" aria-label="각 지역별 향토음식 홍보 배너 - 곤드레밥, 홍어삼합, 안동국시, 몸국 등"></div>
+      <div class="hero__overlay hero__overlay--local"></div>
+      <div class="hero__content">
+        <p class="hero__eyebrow">숨겨진 지역의 맛을 찾아서</p>
+        <h2 class="hero__title">각 지역별 향토음식</h2>
+        <p class="hero__desc">우리가 알고 있던 음식보다<br>더 특별한 지역의 음식 이야기를 만나보세요.</p>
+        <button class="hero__cta hero__cta--local" data-scroll="#content1">향토음식 탐험하기</button>
+      </div>
+    </article>
+
+    <article class="hero__slide hero__slide--horror" data-target="#content2">
+      <div class="hero__bg" style="background-image:url('image/02.png')" role="img" aria-label="엽기적인 호러 음식 홍보 배너 - 눈알이 담긴 냄비 요리와 핏빛 음료"></div>
+      <div class="hero__overlay hero__overlay--horror"></div>
+      <div class="hero__content">
+        <p class="hero__eyebrow hero__eyebrow--horror">"평범한 음식은 지겹다"</p>
+        <h2 class="hero__title hero__title--horror">HORROR FOOD</h2>
+        <p class="hero__desc hero__desc--horror">당신은 먹을 용기가 있습니까?<br>보기만 해도 등골이 서늘한<br>기괴하고 재미있는 호러 레시피</p>
+        <button class="hero__cta hero__cta--horror" data-scroll="#content2">호러 음식 보러가기</button>
+      </div>
+    </article>
+
+  </div>
+
+  <button class="hero__arrow hero__arrow--prev" id="heroPrev" aria-label="이전 슬라이드">‹</button>
+  <button class="hero__arrow hero__arrow--next" id="heroNext" aria-label="다음 슬라이드">›</button>
+  <div class="hero__dots" id="heroDots"></div>
+</section>
+
+<!-- ===================== CONTENT1 : 향토음식 ===================== -->
+<section id="content1" class="local">
+  <div class="local__inner">
+    <header class="section-head">
+      <p class="section-head__eyebrow">Local Food Magazine</p>
+      <h2 class="section-head__title">각 지역별 향토 음식</h2>
+      <p class="section-head__desc">타 지역 사람들은 몰랐던 각 지방마다 알려지지 않은 향토음식이 많이 있습니다.<br>각 지역의 특색있는 알려지지 않은 음식을 소개합니다.</p>
+    </header>
+
+    <div class="local__tabs" id="localTabs"></div>
+    <div class="local__grid" id="localGrid"></div>
+  </div>
+</section>
+
+<!-- ===================== TRANSITION SECTION ===================== -->
+<section id="transition" class="transition">
+  <p class="transition__text" id="transitionText">여기서부터는<br>조금 무서울지도 모릅니다.</p>
+</section>
+
+<!-- ===================== CONTENT2 : 엽기 호러음식 ===================== -->
+<section id="content2" class="horror">
+  <div class="horror__inner">
+    <header class="section-head section-head--horror">
+      <p class="section-head__eyebrow">HORROR FOOD</p>
+      <h2 class="section-head__title">엽기적인 호러 음식</h2>
+      <p class="section-head__desc">여름에 호러음식을 먹으며 더위를 날려버릴 엽기적이고 기괴한 음식들.<br>당신은 먹을 용기가 있으십니까?</p>
+    </header>
+
+    <div class="horror__tabs" id="horrorTabs"></div>
+    <div class="horror__grid" id="horrorGrid"></div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <span class="footer__logo">ODD TABLE <em>이상한식탁</em></span>
+      <p class="footer__desc">전국 각지의 숨겨진 향토음식부터 등골 서늘한 호러 레시피까지,<br>특이한 식품만을 전문으로 소개하는 이상한식탁입니다.</p>
+    </div>
+    <div class="footer__sns">
+      <a href="#" aria-label="인스타그램" class="footer__sns-link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
+      </a>
+      <a href="#" aria-label="유튜브" class="footer__sns-link">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="4" stroke="currentColor" stroke-width="2"/><path d="M10 9l6 3-6 3V9z" fill="currentColor"/></svg>
+      </a>
+      <a href="#" aria-label="페이스북" class="footer__sns-link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M14 8h-1.5A2.5 2.5 0 0 0 10 10.5V12H8.5v2H10v6h2v-6h1.7l.3-2H12v-1.2c0-.5.2-.8.9-.8H14V8z" fill="currentColor"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer__mid">
+    <div class="footer__info">
+      <h5>회사 정보</h5>
+      <p>상호명 : (주)이상한식탁</p>
+      <p>대표자 : 김별미</p>
+      <p>주소 : 서울특별시 마포구 어딘가로 42길 12</p>
+      <p>사업자 등록번호 : 123-45-67890</p>
+      <p>통신판매업 신고번호 : 제2026-서울마포-0806호</p>
+      <p>이메일 : contact@oddtable.kr</p>
+    </div>
+    <div class="footer__cs">
+      <h5>고객 서비스</h5>
+      <p>운영시간 : 평일 09:00 - 18:00 (주말·공휴일 휴무)</p>
+      <p class="footer__cs-phone">전화 문의 <strong>1234-5678</strong></p>
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <a href="#">이용약관</a>
+    <span>|</span>
+    <a href="#">개인정보처리방침</a>
+    <span class="footer__copyright">© 2026 ODD TABLE. All rights reserved.</span>
+  </div>
+</footer>
+
+<!-- ===================== 향토음식 상세 모달 ===================== -->
+<div class="modal-overlay" id="localModalOverlay">
+  <div class="modal local-modal" role="dialog" aria-modal="true">
+    <button class="modal__close" id="localModalClose" aria-label="닫기">×</button>
+    <div class="local-modal__left">
+      <p class="local-modal__region" id="localModalRegion"></p>
+      <h3 class="local-modal__name" id="localModalName"></h3>
+
+      <div class="local-modal__block">
+        <h4>유래</h4>
+        <p id="localModalOrigin"></p>
+      </div>
+      <div class="local-modal__block">
+        <h4>재료</h4>
+        <ul id="localModalIngredients"></ul>
+      </div>
+      <div class="local-modal__block">
+        <h4>레시피</h4>
+        <ol id="localModalRecipe"></ol>
+      </div>
+
+      <div class="copy-row">
+        <button class="copy-btn" id="localModalCopy">레시피 복사하기</button>
+        <span class="copy-feedback" id="localModalCopyFeedback">✓ 레시피가 복사되었습니다.</span>
+      </div>
+    </div>
+    <div class="local-modal__right">
+      <img id="localModalMainImg" class="local-modal__main-img" src="" alt="향토음식 대표 이미지">
+      <div class="local-modal__thumbs" id="localModalThumbs"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== 호러음식 상세 모달 ===================== -->
+<div class="modal-overlay modal-overlay--horror" id="horrorModalOverlay">
+  <div class="modal horror-modal" role="dialog" aria-modal="true">
+    <button class="modal__close modal__close--horror" id="horrorModalClose" aria-label="닫기">×</button>
+    <div class="horror-modal__left">
+      <p class="horror-modal__category" id="horrorModalCategory"></p>
+      <h3 class="horror-modal__name" id="horrorModalName"></h3>
+      <p class="horror-modal__tagline" id="horrorModalTagline"></p>
+
+      <div class="horror-modal__block">
+        <h4>재료</h4>
+        <ul id="horrorModalIngredients"></ul>
+      </div>
+      <div class="horror-modal__block">
+        <h4>레시피</h4>
+        <ol id="horrorModalRecipe"></ol>
+      </div>
+
+      <div class="copy-row">
+        <button class="copy-btn copy-btn--horror" id="horrorModalCopy">레시피 복사하기</button>
+        <span class="copy-feedback copy-feedback--horror" id="horrorModalCopyFeedback">✓ 레시피가 복사되었습니다.</span>
+      </div>
+    </div>
+    <div class="horror-modal__right">
+      <img id="horrorModalMainImg" class="horror-modal__main-img" src="" alt="호러음식 대표 이미지">
+      <div class="horror-modal__grid" id="horrorModalGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== 귀신 인터랙션 레이어 ===================== -->
+<div class="ghost-layer" id="ghostLayer"></div>
+
+<div class="jumpscare-overlay" id="jumpscareOverlay">
+  <img id="jumpscareImg" class="jumpscare-img" src="" alt="놀란 귀신">
+</div>
+
+<div class="toast" id="toast">
+  <span>숨겨진 호러 레시피 발견!</span>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

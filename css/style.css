@@ -1,0 +1,1568 @@
+/* ==========================================================================
+   0. RESET & VARIABLES
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --pine: #21302B;
+  --yellow: #FFC200;
+  --ivory: #F6F3EA;
+  --text: #1A1A1A;
+  --h-black: #090909;
+  --blood: #B8180A;
+  --magenta: #A20BB8;
+  --light: #E7E7E7;
+  --header-h: 50px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: 'Pretendard', 'Poppins', sans-serif;
+  color: var(--text);
+  background: var(--ivory);
+  overflow-x: hidden;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+}
+
+ul, ol {
+  margin: 0;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   1. HEADER
+   ========================================================================== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-h);
+  background: #fff;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+  font-family: 'Poppins', 'Pretendard', sans-serif;
+}
+
+.hamburger {
+  width: 26px;
+  height: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 26px;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--pine);
+  border-radius: 2px;
+}
+
+.main-nav {
+  display: flex;
+  gap: 30px;
+  height: 100%;
+}
+
+.main-nav__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.main-nav__link {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 15px;
+  position: relative;
+  padding-bottom: 4px;
+  white-space: nowrap;
+}
+
+.main-nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--yellow);
+  transition: width 0.25s;
+}
+
+.main-nav__link:hover::after {
+  width: 100%;
+}
+
+/* 헤더 서브메뉴 (호버 시 슬라이드 다운) */
+.main-nav__submenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -8px);
+  min-width: 150px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.16);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  z-index: 1001;
+}
+
+/* 메뉴 링크와 드롭다운 사이 빈틈 때문에 호버가 끊기지 않도록 보이지 않는 다리(bridge)를 둔다 */
+.main-nav__submenu::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -16px;
+  height: 16px;
+}
+
+.main-nav__item:hover .main-nav__submenu,
+.main-nav__item.submenu-open .main-nav__submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 4px);
+  pointer-events: auto;
+}
+
+.main-nav__submenu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.main-nav__submenu-list li a {
+  display: block;
+  padding: 9px 16px;
+  border-radius: 6px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+
+.main-nav__submenu--local .main-nav__submenu-list li a:hover {
+  background: var(--pine);
+  color: var(--yellow);
+}
+
+.main-nav__submenu--horror {
+  background: #111;
+  border: 1px solid rgba(184, 24, 10, 0.35);
+  box-shadow: 0 16px 32px rgba(184, 24, 10, 0.25);
+}
+
+.main-nav__submenu--horror .main-nav__submenu-list li a {
+  color: #eee;
+}
+
+.main-nav__submenu--horror .main-nav__submenu-list li a:hover {
+  background: var(--blood);
+  color: #fff;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  color: var(--pine);
+}
+
+.logo__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.logo__text strong {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  color: var(--pine);
+}
+
+.logo__text em {
+  font-style: normal;
+  font-size: 10.5px;
+  color: #777;
+  letter-spacing: 1px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  background: #F2F1EC;
+  border-radius: 24px;
+  padding: 8px 8px 8px 18px;
+  width: 260px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.search__input {
+  border: none;
+  background: transparent;
+  outline: none;
+  flex: 1;
+  font-size: 13px;
+  color: #333;
+  min-width: 0;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.search__input::placeholder {
+  color: #9a9a9a;
+}
+
+.search__btn {
+  border: none;
+  background: var(--pine);
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   2. SIDE MENU (햄버거)
+   ========================================================================== */
+.side-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+  z-index: 1400;
+}
+
+.side-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -340px;
+  width: 320px;
+  max-width: 85vw;
+  height: 100%;
+  background: #fff;
+  z-index: 1500;
+  transition: left 0.35s ease;
+  padding: 34px 26px;
+  overflow-y: auto;
+}
+
+.side-menu.active {
+  left: 0;
+}
+
+.side-menu__close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: var(--pine);
+  line-height: 1;
+}
+
+.side-menu__logo {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  color: var(--pine);
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.side-menu__logo em {
+  font-style: normal;
+  font-size: 12px;
+  color: #888;
+  margin-left: 8px;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.accordion__trigger {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #eee;
+  padding: 16px 4px;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.accordion__trigger span {
+  transition: transform 0.25s;
+  color: var(--yellow);
+  font-size: 18px;
+}
+
+.accordion__trigger.active span {
+  transform: rotate(135deg);
+}
+
+.accordion__panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.accordion__panel.active {
+  max-height: 640px;
+}
+
+.accordion__list {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0 10px 8px;
+}
+
+.accordion__list li a {
+  display: block;
+  padding: 9px 4px;
+  color: #555;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.accordion__list li a:hover {
+  color: var(--pine);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   3. HERO / MAIN 슬라이더
+   ========================================================================== */
+.hero {
+  position: relative;
+  margin-top: var(--header-h);
+  height: calc(100vh - var(--header-h));
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero__track {
+  display: flex;
+  width: 200%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.hero__slide {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.03);
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.hero__overlay--local {
+  background: linear-gradient(120deg, rgba(33, 48, 43, 0.88) 0%, rgba(33, 48, 43, 0.4) 55%, rgba(33, 48, 43, 0.12) 100%);
+}
+
+.hero__overlay--horror {
+  background: linear-gradient(120deg, rgba(9, 9, 9, 0.92) 0%, rgba(184, 24, 10, 0.42) 60%, rgba(9, 9, 9, 0.18) 100%);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 8%;
+  max-width: 640px;
+  color: #fff;
+}
+
+.hero__eyebrow {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin: 0 0 12px;
+  color: var(--yellow);
+  font-size: 15px;
+}
+
+.hero__eyebrow--horror {
+  font-family: 'Pretendard', sans-serif;
+  font-style: italic;
+  color: #eee;
+}
+
+.hero__title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: clamp(28px, 4vw, 48px);
+  margin: 0 0 18px;
+  line-height: 1.25;
+}
+
+.hero__title--horror {
+  font-family: 'Nosifer', 'Pretendard', cursive;
+  font-size: clamp(30px, 5vw, 50px);
+  color: #fff;
+  text-shadow: 0 0 20px rgba(184, 24, 10, 0.9);
+}
+
+.hero__desc {
+  font-size: 16px;
+  line-height: 1.75;
+  margin: 0 0 30px;
+  color: #f0f0f0;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.hero__cta {
+  align-self: flex-start;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 32px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hero__cta--local {
+  background: var(--yellow);
+  color: var(--pine);
+  font-family: 'Poppins', 'Pretendard', sans-serif;
+}
+
+.hero__cta--horror {
+  background: var(--blood);
+  color: #fff;
+  font-family: 'Poppins', 'Pretendard', sans-serif;
+}
+
+.hero__cta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.hero__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+  font-size: 26px;
+  cursor: pointer;
+  z-index: 5;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s;
+}
+
+.hero__arrow:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.hero__arrow--prev { left: 24px; }
+.hero__arrow--next { right: 24px; }
+
+.hero__dots {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 5;
+}
+
+.hero__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s;
+}
+
+.hero__dot.active {
+  background: var(--yellow);
+  width: 28px;
+  border-radius: 6px;
+}
+
+/* ==========================================================================
+   4. SECTION HEAD (공통)
+   ========================================================================== */
+.section-head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 48px;
+}
+
+.section-head__eyebrow {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: var(--yellow);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.section-head__title {
+  font-family: 'Poppins', 'Pretendard', sans-serif;
+  font-weight: 800;
+  font-size: clamp(26px, 3.4vw, 38px);
+  color: var(--pine);
+  margin: 0 0 18px;
+}
+
+.section-head__desc {
+  color: #444;
+  line-height: 1.85;
+  font-size: 15px;
+}
+
+.section-head--horror .section-head__eyebrow {
+  color: var(--blood);
+  font-family: 'Nosifer', cursive;
+  letter-spacing: 3px;
+}
+
+.section-head--horror .section-head__title {
+  font-family: 'Creepster', 'Pretendard', cursive;
+  color: #fff;
+  text-shadow: 0 0 18px rgba(184, 24, 10, 0.7);
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+
+.section-head--horror .section-head__desc {
+  color: #ccc;
+}
+
+/* ==========================================================================
+   5. CONTENT1 : 향토음식
+   ========================================================================== */
+.local {
+  min-height: 100vh;
+  background: var(--ivory);
+  padding: 130px 24px 110px;
+  color: var(--text);
+}
+
+.local__inner {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.local__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 44px;
+}
+
+.tab-btn {
+  width: 90px;
+  height: 50px;
+  background: #1A1A1A;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.tab-btn:hover {
+  transform: translateY(-3px);
+}
+
+.tab-btn.active {
+  background: var(--pine);
+  color: var(--yellow);
+}
+
+.local__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  justify-content: center;
+  gap: 30px;
+}
+
+.food-card {
+  position: relative;
+  width: 300px;
+  height: 350px;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.35s;
+  animation: fadeInUp 0.5s ease both;
+}
+
+.food-card:hover {
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.25);
+}
+
+.food-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.food-card:hover .food-card__img {
+  transform: scale(1.05);
+}
+
+.food-card__base {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 18px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0));
+  color: #fff;
+}
+
+.food-card__region {
+  font-size: 12px;
+  color: var(--yellow);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.food-card__name {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.food-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 26px;
+  transition: opacity 0.35s;
+  color: #fff;
+}
+
+.food-card:hover .food-card__overlay {
+  opacity: 1;
+}
+
+.food-card__desc {
+  font-size: 14px;
+  line-height: 1.65;
+  margin-bottom: 18px;
+}
+
+.food-card__more {
+  font-weight: 700;
+  color: var(--yellow);
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   6. TRANSITION SECTION
+   ========================================================================== */
+.transition {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #21302B;
+  position: relative;
+  overflow: hidden;
+}
+
+.transition__text {
+  font-family: 'Creepster', 'Pretendard', cursive;
+  font-size: clamp(24px, 4.2vw, 46px);
+  color: #fff;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px rgba(184, 24, 10, 0.7);
+  padding: 0 20px;
+}
+
+.transition__text.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   7. CONTENT2 : 엽기 호러음식
+   ========================================================================== */
+.horror {
+  min-height: 100vh;
+  background: var(--h-black);
+  padding: 130px 24px 110px;
+  color: var(--light);
+  position: relative;
+  overflow: hidden;
+}
+
+.horror__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 44px;
+}
+
+.tab-btn--horror {
+  width: 90px;
+  height: 50px;
+  background: var(--blood);
+  color: #090909;
+  border: none;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.tab-btn--horror:hover {
+  transform: translateY(-3px);
+}
+
+.tab-btn--horror.active {
+  background: var(--magenta);
+  color: #fff;
+}
+
+.horror__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  justify-content: center;
+  gap: 34px;
+}
+
+.horror-card {
+  position: relative;
+  width: 300px;
+  height: 350px;
+  cursor: pointer;
+  background: #111;
+  clip-path: polygon(1.5% 2%, 60% 0%, 98% 1%, 100% 35%, 99% 62%, 100% 100%, 40% 99%, 2% 100%, 0% 68%, 3% 38%);
+  box-shadow: 0 0 14px rgba(184, 24, 10, 0.28);
+  transition: box-shadow 0.4s;
+  animation: fadeInUp 0.5s ease both;
+  overflow: hidden;
+}
+
+.horror-card:hover {
+  box-shadow: 0 0 32px rgba(184, 24, 10, 0.55);
+}
+
+.horror-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.82);
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.horror-card:hover .horror-card__img {
+  transform: scale(1.06);
+  filter: brightness(1.05);
+}
+
+@keyframes glitchShake {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-3px, 1px); filter: drop-shadow(2px 0 0 rgba(184, 24, 10, 0.7)) drop-shadow(-2px 0 0 rgba(162, 11, 184, 0.6)); }
+  40%  { transform: translate(3px, -1px); }
+  60%  { transform: translate(-2px, 0); }
+  80%  { transform: translate(2px, 1px); }
+  100% { transform: translate(0, 0); }
+}
+
+.horror-card__img.glitching {
+  animation: glitchShake 0.18s linear;
+}
+
+.horror-card__overlay-black {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.horror-card__overlay-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(200deg, rgba(184, 24, 10, 0.65), rgba(9, 9, 9, 0.15) 70%);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.horror-card:hover .horror-card__overlay-black,
+.horror-card:hover .horror-card__overlay-gradient {
+  opacity: 1;
+}
+
+.horror-card__name {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 82px;
+  font-size: 19px;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'Creepster', 'Pretendard', cursive;
+  letter-spacing: 1px;
+  transform: translateY(40px);
+  transition: transform 0.5s ease;
+  z-index: 2;
+}
+
+.horror-card:hover .horror-card__name {
+  transform: translateY(0);
+}
+
+.horror-card__desc {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 44px;
+  font-size: 12px;
+  line-height: 1.55;
+  color: #eee;
+  opacity: 0;
+  transition: opacity 0.5s 0.1s;
+  z-index: 2;
+}
+
+.horror-card:hover .horror-card__desc {
+  opacity: 1;
+}
+
+.horror-card__more {
+  position: absolute;
+  left: 20px;
+  bottom: 16px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--blood);
+  opacity: 0;
+  transition: opacity 0.5s 0.15s;
+  z-index: 2;
+  text-shadow: 0 0 8px rgba(184, 24, 10, 0.8);
+}
+
+.horror-card:hover .horror-card__more {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   8. MODAL 공통 + 향토음식 모달
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+  padding: 20px;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  background: #fff;
+  width: min(1000px, 90vw);
+  max-height: 90vh;
+  border-radius: 0;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  transform: scale(0.9);
+  transition: transform 0.35s;
+}
+
+.modal-overlay.active .modal {
+  transform: scale(1);
+}
+
+.modal__close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.08);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  color: var(--text);
+  line-height: 1;
+}
+
+.modal__close--horror {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.local-modal__left {
+  width: 45%;
+  padding: 52px 36px 36px;
+  overflow-y: auto;
+}
+
+.local-modal__right {
+  width: 55%;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+}
+
+.local-modal__main-img {
+  width: 100%;
+  height: 72%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.local-modal__thumbs {
+  display: flex;
+  gap: 2px;
+  height: 28%;
+}
+
+.local-modal__thumbs img {
+  width: 33.333%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.local-modal__thumbs img:hover,
+.local-modal__thumbs img.active {
+  opacity: 1;
+}
+
+.local-modal__region {
+  color: var(--pine);
+  background: var(--yellow);
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.local-modal__name {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--pine);
+  margin: 0 0 22px;
+  font-family: 'Poppins', 'Pretendard', sans-serif;
+}
+
+.local-modal__block {
+  margin-bottom: 20px;
+}
+
+.local-modal__block h4 {
+  font-size: 14px;
+  color: var(--pine);
+  margin: 0 0 8px;
+  border-left: 4px solid var(--yellow);
+  padding-left: 8px;
+}
+
+.local-modal__block p,
+.local-modal__block li {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #333;
+}
+
+.local-modal__block ul,
+.local-modal__block ol {
+  padding-left: 20px;
+}
+
+.copy-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.copy-btn {
+  background: var(--pine);
+  color: #fff;
+  border: none;
+  padding: 11px 22px;
+  border-radius: 24px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.copy-btn:hover {
+  background: #16201b;
+}
+
+.copy-btn--horror {
+  background: var(--blood);
+}
+
+.copy-btn--horror:hover {
+  background: #8f1208;
+}
+
+.copy-feedback {
+  font-size: 13px;
+  color: var(--pine);
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.copy-feedback.show {
+  opacity: 1;
+}
+
+.copy-feedback--horror {
+  color: var(--blood);
+}
+
+/* ==========================================================================
+   9. 호러음식 모달
+   ========================================================================== */
+.modal-overlay--horror .modal {
+  background: #111;
+  border: 1px solid rgba(184, 24, 10, 0.35);
+  box-shadow: 0 0 60px rgba(184, 24, 10, 0.25);
+}
+
+.horror-modal__left {
+  width: 45%;
+  padding: 52px 36px 36px;
+  overflow-y: auto;
+  color: #eee;
+}
+
+.horror-modal__right {
+  width: 55%;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #000;
+}
+
+.horror-modal__main-img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.horror-modal__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  flex: 1;
+}
+
+.horror-modal__grid img {
+  width: 100%;
+  height: 100%;
+  min-height: 90px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.horror-modal__category {
+  display: inline-block;
+  background: var(--blood);
+  color: #fff;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.horror-modal__name {
+  font-family: 'Nosifer', 'Pretendard', cursive;
+  font-size: 23px;
+  color: #fff;
+  margin: 0 0 12px;
+  text-shadow: 0 0 14px rgba(184, 24, 10, 0.8);
+  line-height: 1.4;
+}
+
+.horror-modal__tagline {
+  font-size: 13px;
+  color: #ccc;
+  font-style: italic;
+  margin-bottom: 22px;
+  line-height: 1.6;
+}
+
+.horror-modal__block {
+  margin-bottom: 20px;
+}
+
+.horror-modal__block h4 {
+  font-size: 14px;
+  color: var(--blood);
+  border-left: 4px solid var(--blood);
+  padding-left: 8px;
+  margin: 0 0 8px;
+}
+
+.horror-modal__block p,
+.horror-modal__block li {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #ddd;
+}
+
+.horror-modal__block ul,
+.horror-modal__block ol {
+  padding-left: 20px;
+}
+
+/* ==========================================================================
+   10. FOOTER
+   ========================================================================== */
+.footer {
+  background: #141414;
+  color: #ddd;
+  padding: 60px 40px 26px;
+}
+
+.footer__top {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+}
+
+.footer__logo {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: #fff;
+}
+
+.footer__logo em {
+  font-style: normal;
+  font-size: 12px;
+  color: #999;
+  margin-left: 8px;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.footer__desc {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #999;
+  line-height: 1.8;
+  max-width: 480px;
+}
+
+.footer__sns {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.footer__sns-link {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ddd;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.footer__sns-link:hover {
+  background: var(--yellow);
+  color: #111;
+  border-color: var(--yellow);
+}
+
+.footer__mid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 32px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 32px;
+  margin-bottom: 24px;
+}
+
+.footer__info h5,
+.footer__cs h5 {
+  color: #fff;
+  font-size: 14px;
+  margin: 0 0 14px;
+}
+
+.footer__info p {
+  font-size: 12.5px;
+  color: #999;
+  line-height: 1.95;
+  margin: 0;
+}
+
+.footer__cs p {
+  font-size: 13px;
+  color: #999;
+  margin: 0 0 10px;
+}
+
+.footer__cs-phone strong {
+  color: var(--yellow);
+  font-size: 24px;
+  margin-left: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.footer__bottom {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: #888;
+  flex-wrap: wrap;
+}
+
+.footer__bottom a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+.footer__bottom a:hover {
+  color: var(--yellow);
+}
+
+.footer__copyright {
+  margin-left: auto;
+}
+
+/* ==========================================================================
+   11. 귀신 인터랙션
+   ========================================================================== */
+.ghost-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 900;
+}
+
+.ghost-icon {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  pointer-events: auto;
+  cursor: pointer;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.55));
+  transition: transform 0.2s;
+  will-change: transform, left, top;
+}
+
+.ghost-icon:hover {
+  transform: scale(1.18);
+}
+
+.ghost-bubble {
+  position: absolute;
+  width: 240px;
+  background: #fff;
+  border: 2px solid var(--blood);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 1.55;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  z-index: 901;
+  font-family: 'Pretendard', sans-serif;
+  color: #222;
+}
+
+.ghost-bubble strong {
+  color: var(--blood);
+  font-weight: 800;
+  display: block;
+  font-family: 'Nosifer', 'Pretendard', cursive;
+  font-size: 12px;
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+}
+
+.jumpscare-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s;
+}
+
+.jumpscare-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.jumpscare-img {
+  width: 60vw;
+  height: 60vh;
+  object-fit: contain;
+  border-radius: 14px;
+  box-shadow: 0 0 70px rgba(184, 24, 10, 0.85);
+  transform: scale(0.3);
+}
+
+.jumpscare-overlay.zoom .jumpscare-img {
+  animation: jumpscareZoom 0.15s ease-out forwards;
+}
+
+@keyframes jumpscareZoom {
+  from { transform: scale(0.3); }
+  to   { transform: scale(1); }
+}
+
+.jumpscare-overlay.shake {
+  animation: screenShake 0.4s ease;
+}
+
+@keyframes screenShake {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-10px, 4px); }
+  40%  { transform: translate(10px, -6px); }
+  60%  { transform: translate(-8px, 4px); }
+  80%  { transform: translate(6px, -2px); }
+  100% { transform: translate(0, 0); }
+}
+
+.jumpscare-overlay.fadeout {
+  transition: opacity 1s;
+  opacity: 0;
+}
+
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #111;
+  color: #fff;
+  padding: 16px 22px;
+  border-radius: 10px;
+  border-left: 5px solid var(--blood);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.4);
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 2500;
+  cursor: pointer;
+  transform: translateY(140%);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   12. RESPONSIVE
+   ========================================================================== */
+@media (max-width: 900px) {
+  .header {
+    padding: 0 16px;
+  }
+  .main-nav {
+    gap: 16px;
+  }
+  .main-nav__link {
+    font-size: 13px;
+  }
+  .search {
+    width: 160px;
+  }
+  .logo__text strong {
+    font-size: 14px;
+  }
+  .logo__text em {
+    display: none;
+  }
+  .hero__content {
+    padding: 0 6%;
+  }
+  .modal {
+    flex-direction: column;
+    width: 94vw;
+    max-height: 92vh;
+    overflow-y: auto;
+    border-radius: 24px;
+  }
+  .local-modal__left,
+  .local-modal__right,
+  .horror-modal__left,
+  .horror-modal__right {
+    width: 100%;
+  }
+  .local-modal__main-img {
+    height: 240px;
+  }
+  .local-modal__thumbs {
+    height: 70px;
+  }
+  .horror-modal__main-img {
+    height: 220px;
+  }
+}
+
+@media (max-width: 560px) {
+  .search {
+    display: none;
+  }
+  .main-nav {
+    gap: 12px;
+  }
+  .hero__arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 20px;
+  }
+}
