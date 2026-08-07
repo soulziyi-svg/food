@@ -62,7 +62,7 @@ ul, ol {
   left: 0;
   width: 100%;
   height: var(--header-h);
-  background: #fff;
+  background: #ffffff;
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -241,10 +241,11 @@ ul, ol {
 .search {
   display: flex;
   align-items: center;
-  background: #F2F1EC;
+  background: #fdfbe1;
   border-radius: 24px;
   padding: 8px 8px 8px 18px;
   width: 260px;
+  height: 35px;
   margin-left: auto;
   flex-shrink: 0;
 }
@@ -254,7 +255,7 @@ ul, ol {
   background: transparent;
   outline: none;
   flex: 1;
-  font-size: 13px;
+  font-size: 15px;
   color: #333;
   min-width: 0;
   font-family: 'Pretendard', sans-serif;
@@ -268,8 +269,8 @@ ul, ol {
   border: none;
   background: var(--pine);
   color: #fff;
-  width: 32px;
-  height: 32px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -964,7 +965,7 @@ ul, ol {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(0, 0, 0, 0.812);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1170,7 +1171,7 @@ ul, ol {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: #000;
+  background: #fc02028e;
 }
 
 .horror-modal__main-img {
@@ -1252,8 +1253,8 @@ ul, ol {
    10. FOOTER
    ========================================================================== */
 .footer {
-  background: #141414;
-  color: #ddd;
+  background: rgb(68, 67, 67);
+  color: rgb(255, 255, 255);
   padding: 60px 40px 26px;
 }
 
@@ -1385,8 +1386,8 @@ ul, ol {
 
 .ghost-icon {
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   object-fit: cover;
   border-radius: 50%;
   pointer-events: auto;
@@ -1397,14 +1398,14 @@ ul, ol {
 }
 
 .ghost-icon:hover {
-  transform: scale(1.18);
+  transform: scale(1.3);
 }
 
 .ghost-bubble {
   position: absolute;
-  width: 240px;
+  width: 160px;
   background: #fff;
-  border: 2px solid var(--blood);
+  border: 3px solid var(--blood);
   border-radius: 12px;
   padding: 10px 12px;
   font-size: 12px;
