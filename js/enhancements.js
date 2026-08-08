@@ -276,6 +276,98 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const LOCAL_TRAVEL_GUIDE = {
+    강원도: {
+      restaurant: '강릉감자옹심 강릉본점', address: '강원특별자치도 강릉시 토성로 171',
+      phone: '033-648-0340', hours: '10:30~16:00 · 목요일 휴무',
+      attraction: '강릉중앙시장 · 월화거리 · 안목해변 커피거리',
+      tags: ['강릉여행', '강원도맛집', '강릉중앙시장'],
+      source: 'https://kr.datainkorea.com/trip_main/local_view?contentid=133817',
+    },
+    경상도: {
+      restaurant: '예미정', address: '경상북도 안동시 옹정골길 111',
+      phone: '054-822-0500', hours: '화~일 11:00~21:00 · 월요일 휴무',
+      attraction: '안동하회마을 · 월영교 · 안동찜닭골목',
+      tags: ['안동여행', '경상도맛집', '안동종가음식'],
+      source: 'https://kroove.co.kr/product/%EC%98%88%EB%AF%B8%EC%A0%95/35012/display/1/',
+    },
+    전라도: {
+      restaurant: '영산홍가', address: '전라남도 나주시 영산포로 197-3',
+      phone: '061-334-0585', hours: '10:00~21:00 · 휴무는 방문 전 확인',
+      attraction: '영산포 홍어거리 · 금성관 · 영산강 황포돛배',
+      tags: ['나주여행', '전라도맛집', '영산포홍어거리'],
+      source: 'https://korean.visitkorea.or.kr/detail/rem_detail.do?cotid=a3dbc500-d65e-40d4-9675-c99486d03061',
+    },
+    부산: {
+      restaurant: '바삭한밀면', address: '부산광역시 남구 용소로28번길 20',
+      phone: '010-7259-2513', hours: '11:00~20:00 · 브레이크타임 15:00~17:00',
+      attraction: '광안리해수욕장 · UN기념공원 · 해운대 해변',
+      tags: ['부산여행', '부산밀면', '부산로컬맛집'],
+      source: 'https://korean.visitkorea.or.kr/detail/rem_detail.do?cotid=5c1179db-c1af-49a8-ab45-5e7ce8b76b34',
+    },
+    제주도: {
+      restaurant: '거멍국수', address: '제주특별자치도 서귀포시 안덕면 사계로114번길 53-14',
+      phone: '064-792-8787', hours: '08:30~20:30 · 마감시간 변동 가능',
+      attraction: '산방산 · 용머리해안 · 사계해변',
+      tags: ['제주여행', '제주고기국수', '서귀포맛집'],
+      source: 'https://korean.visitkorea.or.kr/detail/rem_detail.do?cotid=9ac31a5d-0bfc-4ff2-89f6-eb5aadaf9f69',
+    },
+    대구: {
+      restaurant: '걸리버막창', address: '대구광역시 중구 동성로3길 58-10',
+      phone: '053-426-0092', hours: '평일·일요일 17:00~02:00 · 토요일 ~03:00',
+      attraction: '동성로 · 서문시장 · 김광석다시그리기길',
+      tags: ['대구여행', '대구막창', '대구10미'],
+      source: 'https://korean.visitkorea.or.kr/detail/rem_detail.do?cotid=000c8cad-de59-414d-a7cd-d09f4b22b80f',
+    },
+    대전: {
+      restaurant: '신도칼국수 본점', address: '대전광역시 동구 대전로825번길 11',
+      phone: '042-253-6799', hours: '10:00~19:30 · 브레이크타임 15:00~17:00',
+      attraction: '대전역 소제동 · 성심당 본점 · 한밭수목원',
+      tags: ['대전여행', '대전칼국수', '대전로컬맛집'],
+      source: 'https://www.tabling.co.kr/place/677cc7fe66de5f069875df8b',
+    },
+    인천: {
+      restaurant: 'Xin(씬)', address: '인천광역시 중구 차이나타운로 25',
+      phone: '032-761-8889', hours: '11:00~21:00 · 브레이크타임 15:00~17:00',
+      attraction: '짜장면박물관 · 송월동 동화마을 · 월미바다열차',
+      tags: ['인천여행', '인천차이나타운', '개항장거리'],
+      source: 'https://www.diningcode.com/profile.php?rid=uXPlMi8HXmyz',
+    },
+  };
+
+  function getLocalTip(food) {
+    const name = food.name;
+    if (/국수|밀면|냉면|쫄면/.test(name)) return '면은 먹기 직전에 삶고 찬 음식은 충분히 헹궈 전분기를 빼야 쫄깃한 식감이 오래 유지돼요.';
+    if (/국|찌개|전골|조림/.test(name)) return '국물 요리는 처음부터 간을 세게 하지 말고 충분히 끓인 뒤 마지막에 간을 맞추면 재료의 깊은 맛이 살아나요.';
+    if (/구이|막창|파전|만두/.test(name)) return '팬과 불판을 충분히 달군 뒤 재료를 올리고 자주 뒤집지 않으면 겉은 바삭하고 속은 촉촉하게 완성돼요.';
+    if (/홍어|꼬막|재첩|문어|육회|젓갈/.test(name)) return '해산물과 생재료는 신선도가 맛을 좌우하므로 구입 즉시 손질하고 차갑게 보관한 뒤 빠르게 조리하세요.';
+    return '지역 재료의 본래 향을 살리기 위해 양념은 조금씩 더하고, 완성 직전에 부족한 간을 맞춰보세요.';
+  }
+
+  function renderLocalTravelProfile(overlay, food) {
+    const guide = LOCAL_TRAVEL_GUIDE[food.region];
+    if (!guide) return;
+    let profile = overlay.querySelector('.local-travel-profile');
+    if (!profile) {
+      profile = document.createElement('section');
+      profile.className = 'local-travel-profile';
+      overlay.querySelector('#localModalOrigin').closest('.local-modal__block').after(profile);
+    }
+    const tel = guide.phone.replace(/[^\d+]/g, '');
+    const hashtags = [...guide.tags, food.name.replace(/\s/g, '')];
+    profile.innerHTML = `
+      <div class="local-tip"><b>TIP</b><p>${escapeHtml(getLocalTip(food))}</p></div>
+      <div class="local-travel-profile__heading"><span>주변 추천 맛집</span><strong>${escapeHtml(guide.restaurant)}</strong></div>
+      <dl class="local-travel-profile__details">
+        <div><dt>주소</dt><dd>${escapeHtml(guide.address)}</dd></div>
+        <div><dt>전화번호</dt><dd><a href="tel:${tel}">${escapeHtml(guide.phone)}</a></dd></div>
+        <div><dt>영업시간</dt><dd>${escapeHtml(guide.hours)}</dd></div>
+        <div><dt>주변 즐길거리</dt><dd>${escapeHtml(guide.attraction)}</dd></div>
+      </dl>
+      <div class="local-travel-profile__tags">${hashtags.map((tag) => `<span>#${escapeHtml(tag)}</span>`).join('')}</div>
+      <p class="local-travel-profile__notice">영업시간·휴무일은 변경될 수 있으니 방문 전 전화로 확인해 주세요. <a href="${guide.source}" target="_blank" rel="noopener noreferrer">정보 확인</a></p>`;
+  }
+
   function getHorrorProfile(food) {
     const ingredientText = food.ingredients.join(' ');
     const heatTerms = ['청양고추', '고춧가루', '고추장', '핫소스', '칠리', '와사비', '매운'];
@@ -320,6 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const prefix = isHorror ? 'horrorModal' : 'localModal';
     const list = document.querySelector(`#${prefix}Ingredients`);
     if (isHorror) renderHorrorProfile(overlay, food);
+    else renderLocalTravelProfile(overlay, food);
     list.innerHTML = food.ingredients.map((item) => `
       <li><label class="ingredient-check"><input type="checkbox"><span data-base="${escapeHtml(item)}">${escapeHtml(item)}</span></label></li>`).join('');
     let tools = overlay.querySelector('.recipe-tools');
