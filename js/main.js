@@ -58,6 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
      ====================================================================== */
   const sideMenu = $('#sideMenu');
   const sideOverlay = $('#sideOverlay');
+  const header = $('#header');
+
+  function updateHeaderTransparency() {
+    header.classList.toggle('is-scrolled', window.scrollY > 20);
+  }
+
+  window.addEventListener('scroll', updateHeaderTransparency, { passive: true });
+  updateHeaderTransparency();
 
   function openSideMenu() {
     sideMenu.classList.add('active');
