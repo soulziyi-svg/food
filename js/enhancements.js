@@ -521,7 +521,7 @@ document.addEventListener('DOMContentLoaded', () => {
     storage.set('odd-table-ghost-enabled', enabled);
     document.body.classList.toggle('ghost-disabled', !enabled);
     ghostToggle.setAttribute('aria-pressed', String(enabled));
-    ghostToggle.querySelector('span').textContent = enabled ? '연출 ON' : '연출 OFF';
+    ghostToggle.querySelector('span').textContent = enabled ? '귀신잡기 ON' : '귀신잡기 OFF';
   }
   setGhostEnabled(ghostEnabled);
   ghostToggle.addEventListener('click', () => setGhostEnabled(ghostToggle.getAttribute('aria-pressed') !== 'true'));
