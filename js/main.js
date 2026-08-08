@@ -95,12 +95,28 @@ document.addEventListener('DOMContentLoaded', () => {
     (c) => `<li><a href="#content2" data-category-link="${c.name}">${c.name}</a></li>`
   ).join('');
 
-  $('#navLocalList').innerHTML = REGIONS.map(
-    (r) => `<li><a href="#content1" data-region-link="${r.name}">${r.name}</a></li>`
-  ).join('');
-  $('#navHorrorList').innerHTML = HORROR_CATEGORIES.map(
-    (c) => `<li><a href="#content2" data-category-link="${c.name}">${c.name}</a></li>`
-  ).join('');
+  $('#navLocalList').innerHTML = REGIONS.map((r) => {
+    const foods = LOCAL_FOODS.filter((f) => f.region === r.name);
+    return `
+      <li class="main-nav__cascade-item">
+        <a href="#content1" data-region-link="${r.name}">${r.name}<span class="main-nav__arrow">›</span></a>
+        <ul class="main-nav__flyout main-nav__flyout--local">
+          ${foods.map((f) => `<li><a href="#content1" data-local-food-id="${f.id}">${f.name}</a></li>`).join('')}
+        </ul>
+      </li>
+    `;
+  }).join('');
+  $('#navHorrorList').innerHTML = HORROR_CATEGORIES.map((c) => {
+    const foods = HORROR_FOODS.filter((f) => f.category === c.name);
+    return `
+      <li class="main-nav__cascade-item">
+        <a href="#content2" data-category-link="${c.name}">${c.name}<span class="main-nav__arrow">›</span></a>
+        <ul class="main-nav__flyout main-nav__flyout--horror">
+          ${foods.map((f) => `<li><a href="#content2" data-horror-food-id="${f.id}">${f.name}</a></li>`).join('')}
+        </ul>
+      </li>
+    `;
+  }).join('');
 
   /* 헤더 향토음식/엽기음식 호버 서브메뉴: 링크에서 드롭다운으로 마우스를 옮기는 사이에
      바로 닫혀버리지 않도록, 벗어난 뒤에도 약간의 유예시간(300ms)을 두고 닫는다.
@@ -141,6 +157,18 @@ document.addEventListener('DOMContentLoaded', () => {
       selectHorrorTab(categoryLink.dataset.categoryLink);
       smoothScrollTo('#content2');
       closeSideMenu();
+    }
+    const localFoodLink = e.target.closest('[data-local-food-id]');
+    if (localFoodLink) {
+      e.preventDefault();
+      const food = LOCAL_FOODS.find((f) => f.id === localFoodLink.dataset.localFoodId);
+      if (food) openLocalModal(food);
+    }
+    const horrorFoodLink = e.target.closest('[data-horror-food-id]');
+    if (horrorFoodLink) {
+      e.preventDefault();
+      const food = HORROR_FOODS.find((f) => f.id === horrorFoodLink.dataset.horrorFoodId);
+      if (food) openHorrorModal(food);
     }
   });
 
