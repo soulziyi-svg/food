@@ -81,10 +81,10 @@ ul, ol {
 .header.is-scrolled {
   background: linear-gradient(
     90deg,
-    rgba(9, 9, 9, 0.7) 0%,
-    rgba(255, 255, 255, 0.7) 50%,
-    rgba(255, 255, 255, 0.7) 50%,
-    rgba(184, 24, 10, 0.7) 100%
+    rgba(9, 9, 9, 0.5) 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(184, 24, 10, 0.5) 100%
   );
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
   backdrop-filter: blur(8px);
