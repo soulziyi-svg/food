@@ -372,7 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateTransition();
 
   /* ======================================================================
-     6. CONTENT2 : 엽기 호러음식 탭 + 카드
+     6. CONTENT2 : 호러음식 탭 + 카드
      ====================================================================== */
   const horrorTabsEl = $('#horrorTabs');
   const horrorGridEl = $('#horrorGrid');
