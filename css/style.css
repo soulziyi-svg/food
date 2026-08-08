@@ -1554,11 +1554,11 @@ ul, ol {
 }
 
 .jumpscare-video {
-  width: 78vw;
-  height: 78vh;
-  object-fit: contain;
-  border-radius: 14px;
-  box-shadow: 0 0 70px rgba(184, 24, 10, 0.85);
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
   transform: scale(0.3);
 }
 
