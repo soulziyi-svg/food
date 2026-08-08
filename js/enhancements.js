@@ -344,6 +344,23 @@ document.addEventListener('DOMContentLoaded', () => {
     return '지역 재료의 본래 향을 살리기 위해 양념은 조금씩 더하고, 완성 직전에 부족한 간을 맞춰보세요.';
   }
 
+  const LOCAL_ORIGIN_CONTEXT = {
+    강원도: '강원 산간 지역은 긴 겨울과 척박한 경작 환경 때문에 감자·메밀·옥수수와 동해안 수산물을 활용한 저장 음식과 구황 음식이 발달했습니다. 소박한 재료를 오래 든든하게 먹기 위한 조리법이 오늘날 강원도 음식 특유의 담백함과 깊은 식감으로 이어졌습니다.',
+    경상도: '경상도 음식은 내륙의 곡물과 산나물, 남해안의 해산물, 안동을 중심으로 이어진 반가 음식 문화가 함께 어우러져 있습니다. 비교적 진한 간과 선명한 맛은 더운 날씨에 음식을 보관하고 많은 사람이 함께 나누어 먹던 생활 방식과도 관련이 있습니다.',
+    전라도: '넓은 평야와 서남해의 갯벌을 함께 품은 전라도는 곡물·채소·해산물이 풍부해 발효와 저장 음식 문화가 특히 발달했습니다. 제철 재료를 아낌없이 활용한 넉넉한 상차림은 손님을 귀하게 대접해 온 남도 음식 문화의 상징으로 자리 잡았습니다.',
+    부산: '한국전쟁기 피란민과 항구 노동자, 여러 지역에서 모여든 사람들이 만든 부산 음식은 빠르게 먹을 수 있으면서도 든든한 한 끼가 되는 방향으로 발전했습니다. 항구 도시의 개방성과 시장 문화가 결합되면서 다른 지역의 조리법을 부산식으로 재해석한 음식이 많습니다.',
+    제주도: '제주는 바람이 강하고 물이 귀한 화산섬 환경 때문에 메밀·보리·돼지고기·해조류를 알뜰하게 활용하는 음식 문화가 발달했습니다. 공동체 행사와 의례에서 음식을 나누던 전통이 강하며, 재료 본연의 맛을 살리는 단순하고 담백한 조리법이 특징입니다.',
+    대구: '대구는 내륙 분지의 더운 기후와 큰 시장을 중심으로 강한 양념, 불맛, 독특한 식감을 강조한 음식이 발달했습니다. 서문시장과 도심 골목의 외식 문화가 성장하면서 서민적인 재료를 개성 있는 별미로 완성한 음식들이 대구를 대표하게 되었습니다.',
+    대전: '철도 교통의 중심지였던 대전은 전국의 식재료와 사람들이 오가며 소박하고 푸짐한 면 요리와 두부 음식이 발달했습니다. 시장과 역 주변에서 빠르고 따뜻하게 배를 채우던 음식이 지역민의 일상식으로 정착해 지금의 대전 향토음식 문화를 만들었습니다.',
+    인천: '개항 이후 여러 나라의 음식 문화와 항구 노동자의 식생활이 만난 인천에서는 면 요리와 해산물 음식이 독특하게 발전했습니다. 차이나타운·신포시장·연안부두 같은 공간을 중심으로 외래 음식이 지역의 재료와 입맛에 맞게 변화하며 인천만의 향토음식이 되었습니다.',
+  };
+
+  function renderDetailedOrigin(food) {
+    const origin = document.querySelector('#localModalOrigin');
+    const context = LOCAL_ORIGIN_CONTEXT[food.region] || '';
+    origin.textContent = `${food.origin} ${context} ${food.name}은 이러한 지역 환경과 생활 방식이 한 그릇에 축적된 음식으로, 단순한 별미를 넘어 지역 주민들의 생업과 계절, 공동체의 기억을 보여주는 향토문화 자산입니다.`;
+  }
+
   function renderLocalTravelProfile(overlay, food) {
     const guide = LOCAL_TRAVEL_GUIDE[food.region];
     if (!guide) return;
@@ -356,7 +373,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const tel = guide.phone.replace(/[^\d+]/g, '');
     const hashtags = [...guide.tags, food.name.replace(/\s/g, '')];
     profile.innerHTML = `
-      <div class="local-tip"><b>TIP</b><p>${escapeHtml(getLocalTip(food))}</p></div>
       <div class="local-travel-profile__heading"><span>주변 추천 맛집</span><strong>${escapeHtml(guide.restaurant)}</strong></div>
       <dl class="local-travel-profile__details">
         <div><dt>주소</dt><dd>${escapeHtml(guide.address)}</dd></div>
@@ -366,6 +382,14 @@ document.addEventListener('DOMContentLoaded', () => {
       </dl>
       <div class="local-travel-profile__tags">${hashtags.map((tag) => `<span>#${escapeHtml(tag)}</span>`).join('')}</div>
       <p class="local-travel-profile__notice">영업시간·휴무일은 변경될 수 있으니 방문 전 전화로 확인해 주세요. <a href="${guide.source}" target="_blank" rel="noopener noreferrer">정보 확인</a></p>`;
+
+    let tip = overlay.querySelector('.local-tip--recipe');
+    if (!tip) {
+      tip = document.createElement('section');
+      tip.className = 'local-tip local-tip--recipe';
+      overlay.querySelector('#localModalRecipe').closest('.local-modal__block').after(tip);
+    }
+    tip.innerHTML = `<b>TIP</b><p>${escapeHtml(getLocalTip(food))}</p>`;
   }
 
   function getHorrorProfile(food) {
@@ -412,7 +436,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const prefix = isHorror ? 'horrorModal' : 'localModal';
     const list = document.querySelector(`#${prefix}Ingredients`);
     if (isHorror) renderHorrorProfile(overlay, food);
-    else renderLocalTravelProfile(overlay, food);
+    else {
+      renderDetailedOrigin(food);
+      renderLocalTravelProfile(overlay, food);
+    }
     list.innerHTML = food.ingredients.map((item) => `
       <li><label class="ingredient-check"><input type="checkbox"><span data-base="${escapeHtml(item)}">${escapeHtml(item)}</span></label></li>`).join('');
     let tools = overlay.querySelector('.recipe-tools');
