@@ -276,6 +276,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function getHorrorProfile(food) {
+    const ingredientText = food.ingredients.join(' ');
+    const heatTerms = ['청양고추', '고춧가루', '고추장', '핫소스', '칠리', '와사비', '매운'];
+    const heatMatches = heatTerms.filter((term) => ingredientText.includes(term)).length;
+    const categoryBase = { 한식: 3, 일식: 2, 양식: 2, 음료: 1, 디저트: 1 }[food.category] || 2;
+    const spice = Math.min(5, Math.max(1, categoryBase + Math.min(2, heatMatches)));
+    const workScore = food.ingredients.length + food.recipe.length * 2;
+    const difficulty = workScore >= 16 ? '어려움' : workScore >= 11 ? '보통' : '쉬움';
+    const tips = {
+      한식: '붉은 양념은 한 번에 넣지 말고 색을 확인하며 나누어 넣으면 핏빛 비주얼과 간을 함께 조절할 수 있어요.',
+      일식: '눈알과 촉수 장식은 물기를 충분히 제거한 뒤 마지막에 올려야 형태가 또렷하게 유지돼요.',
+      양식: '검은 접시를 차갑게 준비하면 붉은 소스와 치즈 장식의 대비가 더 선명해져요.',
+      음료: '얼음과 장식물을 먼저 넣고 음료를 잔 벽을 따라 천천히 부으면 기괴한 층이 오래 유지돼요.',
+      디저트: '완성한 장식은 충분히 식힌 디저트 위에 올려야 녹거나 형태가 무너지지 않아요.',
+    };
+    return { spice, difficulty, tip: tips[food.category] || '장식은 먹기 직전에 올리면 호러 비주얼을 가장 선명하게 유지할 수 있어요.' };
+  }
+
+  function renderHorrorProfile(overlay, food) {
+    const profile = getHorrorProfile(food);
+    let meta = overlay.querySelector('.horror-food-profile');
+    if (!meta) {
+      meta = document.createElement('section');
+      meta.className = 'horror-food-profile';
+      overlay.querySelector('#horrorModalTagline').after(meta);
+    }
+    const peppers = Array.from({ length: 5 }, (_, index) =>
+      `<span class="pepper-rating__item${index < profile.spice ? ' is-active' : ''}" aria-hidden="true">🌶️</span>`).join('');
+    meta.innerHTML = `
+      <div class="horror-food-profile__stats">
+        <div><span>맵기 단계</span><strong class="pepper-rating" aria-label="고추 5개 중 ${profile.spice}개">${peppers}</strong></div>
+        <div><span>조리 난이도</span><strong class="difficulty-badge difficulty-badge--${profile.difficulty === '쉬움' ? 'easy' : profile.difficulty === '보통' ? 'normal' : 'hard'}">${profile.difficulty}</strong></div>
+      </div>
+      <div class="horror-food-profile__tip"><b>TIP</b><p>${escapeHtml(profile.tip)}</p></div>`;
+  }
+
   function enhanceModal(overlay, food) {
     if (!food) return;
     activeFood = food;
@@ -283,6 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isHorror = food.type === 'horror';
     const prefix = isHorror ? 'horrorModal' : 'localModal';
     const list = document.querySelector(`#${prefix}Ingredients`);
+    if (isHorror) renderHorrorProfile(overlay, food);
     list.innerHTML = food.ingredients.map((item) => `
       <li><label class="ingredient-check"><input type="checkbox"><span data-base="${escapeHtml(item)}">${escapeHtml(item)}</span></label></li>`).join('');
     let tools = overlay.querySelector('.recipe-tools');

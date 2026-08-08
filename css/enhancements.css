@@ -375,6 +375,94 @@
   background: rgba(184, 24, 10, 0.13);
 }
 
+.horror-food-profile {
+  margin: 18px 0 24px;
+  padding: 16px;
+  border: 1px solid rgba(184, 24, 10, 0.35);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(184, 24, 10, 0.16), rgba(9, 9, 9, 0.5));
+}
+
+.horror-food-profile__stats {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 12px;
+}
+
+.horror-food-profile__stats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.horror-food-profile__stats span,
+.horror-food-profile__tip b {
+  color: #ddd;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.pepper-rating {
+  display: flex;
+  gap: 2px;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.pepper-rating__item {
+  filter: grayscale(1);
+  opacity: 0.22;
+}
+
+.pepper-rating__item.is-active {
+  filter: none;
+  opacity: 1;
+  text-shadow: 0 0 10px rgba(255, 40, 20, 0.72);
+}
+
+.difficulty-badge {
+  align-self: flex-start;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 12px;
+}
+
+.difficulty-badge--easy { background: #3d8b57; }
+.difficulty-badge--normal { background: #ba7213; }
+.difficulty-badge--hard { background: var(--blood); }
+
+.horror-food-profile__tip {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+  margin-top: 15px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.horror-food-profile__tip b {
+  padding: 4px 7px;
+  color: #090909;
+  background: var(--yellow);
+  border-radius: 5px;
+}
+
+.horror-food-profile__tip p {
+  margin: 0;
+  color: #eee;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@media (max-width: 560px) {
+  .horror-food-profile__stats {
+    grid-template-columns: 1fr;
+  }
+}
+
 .serving-control {
   display: flex;
   align-items: center;
@@ -493,4 +581,3 @@
     transition-duration: 0.01ms !important;
   }
 }
-
