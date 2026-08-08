@@ -62,7 +62,10 @@
     <div class="search-results" id="searchResults" role="listbox" aria-label="검색 결과"></div>
   </div>
   <div class="header-actions">
-    <button class="header-action header-action--ghost" id="ghostToggle" type="button" aria-pressed="true" title="호러 연출 켜기 또는 끄기">👻 <span>연출 ON</span></button>
+    <button class="header-action header-action--ghost" id="ghostToggle" type="button" aria-pressed="true" title="호러 연출 켜기 또는 끄기">
+      <img class="header-action__ghost-icon" src="image/03.png" alt="" aria-hidden="true">
+      <span>연출 ON</span><i class="header-action__status" aria-hidden="true"></i>
+    </button>
     <button class="header-action header-action--favorites" id="favoritesOpen" type="button">♥ <span>저장목록</span><b id="favoriteCount">0</b></button>
     <button class="header-action header-action--signup" id="signupOpen" type="button">회원가입</button>
     <button class="header-action header-action--login" id="loginOpen" type="button">로그인</button>
