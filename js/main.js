@@ -452,13 +452,10 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ======================================================================
      8. 귀신 인터랙션 (랜덤 이동 + 점프스케어 + 말풍선 + 숨겨진 레시피)
      ====================================================================== */
-  /* 귀신 아이콘 클릭 시 image/monster 폴더의 실제 이미지 중 하나가 랜덤으로 점프스케어에 사용된다. */
-  const GHOST_IMAGES = [
-    'image/monster/monster-1.png',
-    'image/monster/monster-2.png',
-    'image/monster/monster-3.png',
-    'image/monster/monster-4.png',
-    'image/monster/monster-5.png',
+  /* 귀신 아이콘 클릭 시 image/monster 폴더의 변신 영상 중 하나가 랜덤으로 재생된다. */
+  const GHOST_VIDEOS = [
+    'image/monster/ghost-transforms-woman.mp4',
+    'image/monster/ghost-transforms-cute-girl.mp4',
   ];
 
   const ghostLayer = $('#ghostLayer');
@@ -509,20 +506,23 @@ document.addEventListener('DOMContentLoaded', () => {
   moveGhost();
 
   const jumpscareOverlay = $('#jumpscareOverlay');
-  const jumpscareImg = $('#jumpscareImg');
+  const jumpscareVideo = $('#jumpscareVideo');
   let lastGhostIndex = -1;
   let jumpscareHideTimer = null;
 
   function showJumpscare() {
     let idx;
     do {
-      idx = Math.floor(Math.random() * GHOST_IMAGES.length);
-    } while (idx === lastGhostIndex && GHOST_IMAGES.length > 1);
+      idx = Math.floor(Math.random() * GHOST_VIDEOS.length);
+    } while (idx === lastGhostIndex && GHOST_VIDEOS.length > 1);
     lastGhostIndex = idx;
 
-    jumpscareImg.src = GHOST_IMAGES[idx];
+    jumpscareVideo.pause();
+    jumpscareVideo.src = GHOST_VIDEOS[idx];
+    jumpscareVideo.currentTime = 0;
     jumpscareOverlay.classList.remove('fadeout');
     jumpscareOverlay.classList.add('active', 'zoom', 'shake');
+    jumpscareVideo.play().catch(() => {});
 
     setTimeout(() => jumpscareOverlay.classList.remove('shake'), 400);
 
@@ -530,6 +530,7 @@ document.addEventListener('DOMContentLoaded', () => {
     jumpscareHideTimer = setTimeout(() => {
       jumpscareOverlay.classList.add('fadeout');
       setTimeout(() => {
+        jumpscareVideo.pause();
         jumpscareOverlay.classList.remove('active', 'zoom', 'fadeout');
       }, 1000);
     }, 5000);

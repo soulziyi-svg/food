@@ -1553,16 +1553,16 @@ ul, ol {
   visibility: visible;
 }
 
-.jumpscare-img {
-  width: 60vw;
-  height: 60vh;
+.jumpscare-video {
+  width: 78vw;
+  height: 78vh;
   object-fit: contain;
   border-radius: 14px;
   box-shadow: 0 0 70px rgba(184, 24, 10, 0.85);
   transform: scale(0.3);
 }
 
-.jumpscare-overlay.zoom .jumpscare-img {
+.jumpscare-overlay.zoom .jumpscare-video {
   animation: jumpscareZoom 0.15s ease-out forwards;
 }
 
