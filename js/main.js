@@ -560,4 +560,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  /* ======================================================================
+     13. 먹방 영상 (MUKBANG VIDEOS)
+     ====================================================================== */
+  const mukbangBackdrop = $('#mukbangBackdrop');
+  const mukbangItems = $$('.mukbang__item');
+
+  function closeMukbangItem(item) {
+    item.classList.remove('is-active');
+    mukbangBackdrop.classList.remove('active');
+  }
+
+  mukbangItems.forEach((item) => {
+    const video = $('.mukbang__video', item);
+    const muteBtn = $('.mukbang__mute-btn', item);
+
+    item.addEventListener('click', () => {
+      const willActivate = !item.classList.contains('is-active');
+      mukbangItems.forEach(closeMukbangItem);
+      if (willActivate) {
+        item.classList.add('is-active');
+        mukbangBackdrop.classList.add('active');
+        video.play().catch(() => {});
+      }
+    });
+
+    muteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      video.muted = !video.muted;
+      const unmuted = !video.muted;
+      muteBtn.classList.toggle('is-unmuted', unmuted);
+      muteBtn.setAttribute('aria-pressed', String(!unmuted));
+      muteBtn.setAttribute('aria-label', unmuted ? '음소거 하기' : '음소거 해제');
+    });
+  });
+
+  mukbangBackdrop.addEventListener('click', () => {
+    mukbangItems.forEach(closeMukbangItem);
+  });
+
 });
