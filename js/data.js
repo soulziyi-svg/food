@@ -572,7 +572,7 @@ const HORROR_FOODS = [
       '전자레인지에 돌려 치즈가 흘러내리도록 녹인다.',
     ],
     image: img('horror-corn-main', 700, 560),
-    extraImages: [img('horror-corn-1', 500, 500), img('horror-corn-2', 500, 500), img('horror-corn-3', 500, 500), img('horror-corn-4', 500, 500)],
+    extraImages: [img('horror-corn-1', 500, 500), img('horror-corn-2', 500, 500)],
   },
   {
     id: 'horror-korean-2',
@@ -587,7 +587,7 @@ const HORROR_FOODS = [
       '두부를 큼직하게 썰어 넣고 끓인다.',
     ],
     image: img('horror-kimchi-main', 700, 560),
-    extraImages: [img('horror-kimchi-1', 500, 500), img('horror-kimchi-2', 500, 500), img('horror-kimchi-3', 500, 500), img('horror-kimchi-4', 500, 500)],
+    extraImages: [img('horror-kimchi-1', 500, 500), img('horror-kimchi-2', 500, 500)],
   },
   {
     id: 'horror-korean-3',
@@ -602,7 +602,7 @@ const HORROR_FOODS = [
       '들기름과 소금을 곁들여 낸다.',
     ],
     image: img('horror-sundae-main', 700, 560),
-    extraImages: [img('horror-sundae-1', 500, 500), img('horror-sundae-2', 500, 500), img('horror-sundae-3', 500, 500), img('horror-sundae-4', 500, 500)],
+    extraImages: [img('horror-sundae-1', 500, 500), img('horror-sundae-2', 500, 500)],
   },
   {
     id: 'horror-korean-4',
@@ -617,7 +617,7 @@ const HORROR_FOODS = [
       '메추리알노른자를 얹고 통깨를 뿌린다.',
     ],
     image: img('horror-yukhoe-main', 700, 560),
-    extraImages: [img('horror-yukhoe-1', 500, 500), img('horror-yukhoe-2', 500, 500), img('horror-yukhoe-3', 500, 500), img('horror-yukhoe-4', 500, 500)],
+    extraImages: [img('horror-yukhoe-1', 500, 500), img('horror-yukhoe-2', 500, 500)],
   },
 
   // 일식
@@ -634,7 +634,7 @@ const HORROR_FOODS = [
       '검은깨로 눈동자를 콕콕 찍어 완성한다.',
     ],
     image: img('horror-ghostsushi-main', 700, 560),
-    extraImages: [img('horror-ghostsushi-1', 500, 500), img('horror-ghostsushi-2', 500, 500), img('horror-ghostsushi-3', 500, 500), img('horror-ghostsushi-4', 500, 500)],
+    extraImages: [img('horror-ghostsushi-1', 500, 500), img('horror-ghostsushi-2', 500, 500)],
   },
   {
     id: 'horror-japanese-2',
@@ -649,7 +649,7 @@ const HORROR_FOODS = [
       '검은 국물을 붓고 쪽파를 뿌린다.',
     ],
     image: img('horror-tentacleudon-main', 700, 560),
-    extraImages: [img('horror-tentacleudon-1', 500, 500), img('horror-tentacleudon-2', 500, 500), img('horror-tentacleudon-3', 500, 500), img('horror-tentacleudon-4', 500, 500)],
+    extraImages: [img('horror-tentacleudon-1', 500, 500), img('horror-tentacleudon-2', 500, 500)],
   },
   {
     id: 'horror-japanese-3',
@@ -664,7 +664,7 @@ const HORROR_FOODS = [
       '연어알을 흩뿌리고 초고추장을 곁들인다.',
     ],
     image: img('horror-eyeballbowl-main', 700, 560),
-    extraImages: [img('horror-eyeballbowl-1', 500, 500), img('horror-eyeballbowl-2', 500, 500), img('horror-eyeballbowl-3', 500, 500), img('horror-eyeballbowl-4', 500, 500)],
+    extraImages: [img('horror-eyeballbowl-1', 500, 500), img('horror-eyeballbowl-2', 500, 500)],
   },
   {
     id: 'horror-japanese-4',
@@ -679,7 +679,7 @@ const HORROR_FOODS = [
       '가쓰오부시를 올려 살아있는 듯 흔들리게 낸다.',
     ],
     image: img('horror-takoyaki-main', 700, 560),
-    extraImages: [img('horror-takoyaki-1', 500, 500), img('horror-takoyaki-2', 500, 500), img('horror-takoyaki-3', 500, 500), img('horror-takoyaki-4', 500, 500)],
+    extraImages: [img('horror-takoyaki-1', 500, 500), img('horror-takoyaki-2', 500, 500)],
   },
 
   // 양식
@@ -696,7 +696,7 @@ const HORROR_FOODS = [
       '치즈를 길게 늘여 거미줄 모양을 연출한다.',
     ],
     image: img('horror-spiderpizza-main', 700, 560),
-    extraImages: [img('horror-spiderpizza-1', 500, 500), img('horror-spiderpizza-2', 500, 500), img('horror-spiderpizza-3', 500, 500), img('horror-spiderpizza-4', 500, 500)],
+    extraImages: [img('horror-spiderpizza-1', 500, 500), img('horror-spiderpizza-2', 500, 500)],
   },
   {
     id: 'horror-western-2',
@@ -711,7 +711,7 @@ const HORROR_FOODS = [
       '파슬리를 뿌려 마무리한다.',
     ],
     image: img('horror-bloodpasta-main', 700, 560),
-    extraImages: [img('horror-bloodpasta-1', 500, 500), img('horror-bloodpasta-2', 500, 500), img('horror-bloodpasta-3', 500, 500), img('horror-bloodpasta-4', 500, 500)],
+    extraImages: [img('horror-bloodpasta-1', 500, 500), img('horror-bloodpasta-2', 500, 500)],
   },
   {
     id: 'horror-western-3',
@@ -726,7 +726,7 @@ const HORROR_FOODS = [
       '달걀노른자를 얹고 후춧가루를 뿌린다.',
     ],
     image: img('horror-braintartare-main', 700, 560),
-    extraImages: [img('horror-braintartare-1', 500, 500), img('horror-braintartare-2', 500, 500), img('horror-braintartare-3', 500, 500), img('horror-braintartare-4', 500, 500)],
+    extraImages: [img('horror-braintartare-1', 500, 500), img('horror-braintartare-2', 500, 500)],
   },
   {
     id: 'horror-western-4',
@@ -741,7 +741,7 @@ const HORROR_FOODS = [
       '핏빛 소스를 흘러내리듯 뿌리고 번으로 덮는다.',
     ],
     image: img('horror-zombieburger-main', 700, 560),
-    extraImages: [img('horror-zombieburger-1', 500, 500), img('horror-zombieburger-2', 500, 500), img('horror-zombieburger-3', 500, 500), img('horror-zombieburger-4', 500, 500)],
+    extraImages: [img('horror-zombieburger-1', 500, 500), img('horror-zombieburger-2', 500, 500)],
   },
 
   // 음료
@@ -758,7 +758,7 @@ const HORROR_FOODS = [
       '눈알 얼음을 띄워 완성한다.',
     ],
     image: img('horror-eyeballcoffee-main', 700, 560),
-    extraImages: [img('horror-eyeballcoffee-1', 500, 500), img('horror-eyeballcoffee-2', 500, 500), img('horror-eyeballcoffee-3', 500, 500), img('horror-eyeballcoffee-4', 500, 500)],
+    extraImages: [img('horror-eyeballcoffee-1', 500, 500), img('horror-eyeballcoffee-2', 500, 500)],
   },
   {
     id: 'horror-drink-2',
@@ -773,7 +773,7 @@ const HORROR_FOODS = [
       '체리를 올려 핏빛 방울처럼 장식한다.',
     ],
     image: img('horror-bloodcocktail-main', 700, 560),
-    extraImages: [img('horror-bloodcocktail-1', 500, 500), img('horror-bloodcocktail-2', 500, 500), img('horror-bloodcocktail-3', 500, 500), img('horror-bloodcocktail-4', 500, 500)],
+    extraImages: [img('horror-bloodcocktail-1', 500, 500), img('horror-bloodcocktail-2', 500, 500)],
   },
   {
     id: 'horror-drink-3',
@@ -788,7 +788,7 @@ const HORROR_FOODS = [
       '드라이아이스 연출로 안개를 더한다.',
     ],
     image: img('horror-poisonslush-main', 700, 560),
-    extraImages: [img('horror-poisonslush-1', 500, 500), img('horror-poisonslush-2', 500, 500), img('horror-poisonslush-3', 500, 500), img('horror-poisonslush-4', 500, 500)],
+    extraImages: [img('horror-poisonslush-1', 500, 500), img('horror-poisonslush-2', 500, 500)],
   },
   {
     id: 'horror-drink-4',
@@ -803,7 +803,7 @@ const HORROR_FOODS = [
       '이쑤시개로 무늬를 퍼뜨려 완성한다.',
     ],
     image: img('horror-spiderlatte-main', 700, 560),
-    extraImages: [img('horror-spiderlatte-1', 500, 500), img('horror-spiderlatte-2', 500, 500), img('horror-spiderlatte-3', 500, 500), img('horror-spiderlatte-4', 500, 500)],
+    extraImages: [img('horror-spiderlatte-1', 500, 500), img('horror-spiderlatte-2', 500, 500)],
   },
 
   // 디저트
@@ -820,7 +820,7 @@ const HORROR_FOODS = [
       '굽기 전 손톱 아래에 붉은잼을 살짝 발라 굽는다.',
     ],
     image: img('horror-fingercookie-main', 700, 560),
-    extraImages: [img('horror-fingercookie-1', 500, 500), img('horror-fingercookie-2', 500, 500), img('horror-fingercookie-3', 500, 500), img('horror-fingercookie-4', 500, 500)],
+    extraImages: [img('horror-fingercookie-1', 500, 500), img('horror-fingercookie-2', 500, 500)],
   },
   {
     id: 'horror-dessert-2',
@@ -835,7 +835,7 @@ const HORROR_FOODS = [
       '초코쿠키를 묘비 모양으로 잘라 꽂는다.',
     ],
     image: img('horror-tombstonetiramisu-main', 700, 560),
-    extraImages: [img('horror-tombstonetiramisu-1', 500, 500), img('horror-tombstonetiramisu-2', 500, 500), img('horror-tombstonetiramisu-3', 500, 500), img('horror-tombstonetiramisu-4', 500, 500)],
+    extraImages: [img('horror-tombstonetiramisu-1', 500, 500), img('horror-tombstonetiramisu-2', 500, 500)],
   },
   {
     id: 'horror-dessert-3',
@@ -850,7 +850,7 @@ const HORROR_FOODS = [
       '연유를 살짝 뿌려 광택을 낸다.',
     ],
     image: img('horror-brainjelly-main', 700, 560),
-    extraImages: [img('horror-brainjelly-1', 500, 500), img('horror-brainjelly-2', 500, 500), img('horror-brainjelly-3', 500, 500), img('horror-brainjelly-4', 500, 500)],
+    extraImages: [img('horror-brainjelly-1', 500, 500), img('horror-brainjelly-2', 500, 500)],
   },
   {
     id: 'horror-dessert-4',
@@ -865,7 +865,7 @@ const HORROR_FOODS = [
       '초콜릿펜으로 눈과 입을 그려 완성한다.',
     ],
     image: img('horror-ghostmeringue-main', 700, 560),
-    extraImages: [img('horror-ghostmeringue-1', 500, 500), img('horror-ghostmeringue-2', 500, 500), img('horror-ghostmeringue-3', 500, 500), img('horror-ghostmeringue-4', 500, 500)],
+    extraImages: [img('horror-ghostmeringue-1', 500, 500), img('horror-ghostmeringue-2', 500, 500)],
   },
 ];
 
